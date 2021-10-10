@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contador</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="data">
+      <div id="data-selection">
+        <h1>Contador</h1>
+        <label for="data">
+          Informe uma data
+          <input type="date" id="data" />
+          <span></span>
+          <button class="iniciar">Iniciar Contagem</button>
+        </label>
+      </div>
+    </div>
+
+    <div class="contagem hide-area">
+      <header>
+        <h1>Contador</h1>
+        <a href="#" class="reiniciar">Reiniciar</a>
+      </header>
+      <div id="contagem">
+        <p>Faltam</p>
+        <div id="contador">
+          <ul class="contagem-area dia">
+            <li>00</li>
+            <li>Dias</li>
+          </ul>
+          <ul class="contagem-area hora">
+            <li>00</li>
+            <li>Horas</li>
+          </ul>
+          <ul class="contagem-area minuto">
+            <li>00</li>
+            <li>Minutos</li>
+          </ul>
+          <ul class="contagem-area segundo">
+            <li>00</li>
+            <li>Segundos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
