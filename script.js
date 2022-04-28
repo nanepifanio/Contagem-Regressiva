@@ -34,36 +34,43 @@ const secondsConvert = (timeStamp) => (timeStamp % (60 * 1000)) / 1000;
 
 const handleZeroLeft = (time) => (time < 10 ? `0${time}` : time);
 
-const showCountDown = (days, hours, minutes, seconds) => {
+const showCountDown = ({ daysLeft, hoursLeft, minutesLeft, secondsLeft }) => {
   if (displayCountDown.classList.contains("hide-area")) {
     displayDateChoose.classList.add("hide-area");
     displayCountDown.classList.remove("hide-area");
   }
-  days === 1 ? (dayOrDays.innerText = "Dia") : (dayOrDays.innerText = "Dias");
-  hours === 1
+  daysLeft === 1
+    ? (dayOrDays.innerText = "Dia")
+    : (dayOrDays.innerText = "Dias");
+  hoursLeft === 1
     ? (hourOrHours.innerText = "Hora")
     : (hourOrHours.innerText = "Horas");
-  minutes === 1
+  minutesLeft === 1
     ? (minuteOrMinutes.innerText = "Minuto")
     : (minuteOrMinutes.innerText = "Minutos");
-  seconds === 1
+  secondsLeft === 1
     ? (secondOrSeconds.innerText = "Segundo")
     : (secondOrSeconds.innerText = "Segundos");
-  showDays.innerText = days;
-  showHours.innerText = handleZeroLeft(hours);
-  showMinutes.innerText = handleZeroLeft(minutes);
-  showSeconds.innerText = handleZeroLeft(seconds);
+  showDays.innerText = daysLeft;
+  showHours.innerText = handleZeroLeft(hoursLeft);
+  showMinutes.innerText = handleZeroLeft(minutesLeft);
+  showSeconds.innerText = handleZeroLeft(secondsLeft);
+};
+
+const updateTime = (chosenTimeStamp) => {
+  const nowTimeStamp = new Date().getTime();
+  const leftTimeStamp = chosenTimeStamp - nowTimeStamp;
+  const daysLeft = Math.floor(daysConvert(leftTimeStamp));
+  const hoursLeft = Math.floor(hoursConvert(leftTimeStamp));
+  const minutesLeft = Math.floor(minutesConvert(leftTimeStamp));
+  const secondsLeft = Math.floor(secondsConvert(leftTimeStamp));
+  return { daysLeft, hoursLeft, minutesLeft, secondsLeft };
 };
 
 const initCountDown = (chosenTimeStamp) => {
+  showCountDown(updateTime(chosenTimeStamp));
   interval = setInterval(() => {
-    const nowTimeStamp = new Date().getTime();
-    const leftTimeStamp = chosenTimeStamp - nowTimeStamp;
-    const daysLeft = Math.floor(daysConvert(leftTimeStamp));
-    const hoursLeft = Math.floor(hoursConvert(leftTimeStamp));
-    const minutesLeft = Math.floor(minutesConvert(leftTimeStamp));
-    const secondsLeft = Math.floor(secondsConvert(leftTimeStamp));
-    showCountDown(daysLeft, hoursLeft, minutesLeft, secondsLeft);
+    showCountDown(updateTime(chosenTimeStamp));
   }, 1000);
 };
 
